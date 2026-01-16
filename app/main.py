@@ -4,6 +4,7 @@ from app.schemas import DelayRequest, DelayResponse
 from app.predictor import predict_delay
 from app.geo import is_within_bengaluru
 from app.recommender import recommend_hospital
+from app.hospitals import hospitals_df
 from app.schemas import RecommendRequest, RecommendResponse
 
 
@@ -59,3 +60,9 @@ def recommend(req: RecommendRequest):
         "predicted_delay": best["predicted_delay"],
         "distance_km": best["distance_km"]
     }
+
+@app.get("/hospitals")
+def get_hospitals():
+    return hospitals_df[
+        ["hospital_id", "name", "lat", "lon"]
+    ].to_dict(orient="records")
