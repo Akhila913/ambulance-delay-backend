@@ -45,7 +45,8 @@ def recommend(req: RecommendRequest):
             "hospital_name": "N/A",
             "eta_minutes": -1,
             "predicted_delay": -1,
-            "distance_km": -1
+            "distance_km": -1,
+            "traffic_level": -1
         }
 
     best, _ = recommend_hospital(
