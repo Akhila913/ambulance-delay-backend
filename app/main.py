@@ -14,6 +14,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:3000",
+        "https://medroute-beryl.vercel.app",
         "https://ambulance-delay-frontend.onrender.com"
     ],
     allow_credentials=True,
