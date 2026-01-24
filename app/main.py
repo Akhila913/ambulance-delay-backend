@@ -58,8 +58,10 @@ def recommend(req: RecommendRequest):
         "hospital_name": best["hospital_name"],
         "eta_minutes": best["eta_minutes"],
         "predicted_delay": best["predicted_delay"],
-        "distance_km": best["distance_km"]
+        "distance_km": best["distance_km"],
+        "traffic_level": best["traffic_level"]
     }
+
 
 @app.get("/hospitals")
 def get_hospitals():

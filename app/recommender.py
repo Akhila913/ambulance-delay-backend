@@ -13,7 +13,7 @@ def recommend_hospital(lat, lon, hour, is_weekend):
         )
 
         ideal_time = ideal_time_minutes(distance)
-        delay = predict_delay(distance, hour, is_weekend)
+        delay, traffic_level = predict_delay(distance, hour, is_weekend)
 
         eta = ideal_time + delay
 
@@ -22,7 +22,8 @@ def recommend_hospital(lat, lon, hour, is_weekend):
             "hospital_name": h["name"],
             "distance_km": round(distance, 2),
             "eta_minutes": round(eta, 2),
-            "predicted_delay": round(delay, 2)
+            "predicted_delay": round(delay, 2),
+            "traffic_level": traffic_level
         })
 
     results.sort(key=lambda x: x["eta_minutes"])

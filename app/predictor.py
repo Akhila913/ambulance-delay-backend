@@ -12,7 +12,7 @@ FEATURES = [
 ]
 
 
-def predict_delay(distance_km: float, hour: int, is_weekend: int) -> float:
+def predict_delay(distance_km: float, hour: int, is_weekend: int):
     traffic_level = get_traffic_level(hour, is_weekend)
     rush_hour = is_rush_hour(hour)
 
@@ -24,4 +24,6 @@ def predict_delay(distance_km: float, hour: int, is_weekend: int) -> float:
         "rush_hour": rush_hour
     }])
 
-    return float(model.predict(X)[0])
+    delay = float(model.predict(X)[0])
+    return delay, traffic_level
+

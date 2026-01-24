@@ -19,4 +19,5 @@ class RecommendResponse(BaseModel):
     eta_minutes: float
     predicted_delay: float
     distance_km: float
+    traffic_level: int
 
