@@ -59,6 +59,15 @@ Returns the recommended hospital and ETA for a given emergency location.
   "is_weekend": 0
 }
 ```
+**Response**
+```json
+{
+  "hospital_name": "XYZ Hospital",
+  "eta_minutes": 19.8,
+  "predicted_delay": 5.9,
+  "distance_km": 4.6
+}
+```
 
 ### GET /hospitals
 
@@ -96,3 +105,4 @@ Returns a list of emergency-capable hospitals used by the system.
 
 ### Frontend Repository:
 https://github.com/Akhila913/ambulance-delay-frontend
+
