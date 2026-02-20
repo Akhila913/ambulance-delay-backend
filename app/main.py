@@ -6,9 +6,13 @@ from app.geo import is_within_bengaluru
 from app.recommender import recommend_hospital
 from app.hospitals import hospitals_df
 from app.schemas import RecommendRequest, RecommendResponse
+from app.database import engine, SessionLocal
+from app.models import Base, PredictionLog
+
 
 
 app = FastAPI(title="Ambulance Delay Prediction API")
+Base.metadata.create_all(bind=engine)
 
 app.add_middleware(
     CORSMiddleware,
@@ -55,6 +59,25 @@ def recommend(req: RecommendRequest):
         req.hour,
         req.is_weekend
     )
+    
+    db = SessionLocal()
+
+    try:
+        log = PredictionLog(
+            lat=req.lat,
+            lon=req.lon,
+            hour=req.hour,
+            is_weekend=req.is_weekend,
+            predicted_delay=best["predicted_delay"],
+            eta_minutes=best["eta_minutes"],
+            hospital_name=best["hospital_name"]
+        )
+        db.add(log)
+        db.commit()
+    except Exception:
+        db.rollback()
+    finally:
+        db.close()
 
     return {
         "hospital_name": best["hospital_name"],
